@@ -1,4 +1,4 @@
-## Yeoman generator for Thelma projects
+# Yeoman generator for Thelma web components
 
 ## Introduction
 

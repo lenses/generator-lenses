@@ -8,6 +8,7 @@ Thelma web components are built using the [Polymer](http://www.polymer-project.o
 
 ## Features
 * Sub-generator to create Thelma elements for your app
+* Quick deploy to GitHub pages
 
 ## Installation
 

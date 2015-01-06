@@ -1,7 +1,5 @@
 ## Yeoman generator for Thelma projects
 
-<img src="http://i.imgur.com/dsFChIk.png"/>
-
 ## Introduction
 
 Thelma web components are built using the [Polymer](http://www.polymer-project.org/) library. The project allows developers to retreive, manipulate and visualize data by chaining these components together. 

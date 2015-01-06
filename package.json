@@ -26,6 +26,8 @@
     "yeoman-generator": "^0.18.0",
     "chalk": "^0.5.0",
     "lodash": "^2.4.1",
+    "ncp": "^1.0.1",
+    "rimraf": "^2.2.8",
     "yosay": "^0.3.0"
   },
   "devDependencies": {

@@ -1,47 +1,69 @@
-# generator-thelma [![Build Status](https://secure.travis-ci.org/nishacodes/generator-thelma.png?branch=master)](https://travis-ci.org/nishacodes/generator-thelma)
+## Yeoman generator for Thelma projects
 
-> [Yeoman](http://yeoman.io) generator
+<img src="http://i.imgur.com/dsFChIk.png"/>
 
+## Introduction
 
-## Getting Started
+Thelma web components are built using the [Polymer](http://www.polymer-project.org/) library. The project allows developers to retreive, manipulate and visualize data by chaining these components together. 
 
-### What is Yeoman?
+`generator-thelma` provides Thelma component scaffolding using [Yeoman](http://yeoman.io) (a scaffolding tool for the web), letting you easily create and customize Thelma (custom) elements via the command-line and import them using HTML Imports. This saves you time writing boilerplate code so you can start writing up the logic to your components straight away.
 
-Trick question. It's not a thing. It's this guy:
+## Features
+* Sub-generator to create Thelma elements for your app
 
-![](http://i.imgur.com/JHaAlBJ.png)
+## Installation
 
-Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
+Install the generator
+`npm install -g generator-thelma`
 
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
+Make a new directory and cd into it
+`mkdir -p my-project && cd $_`
 
+Generate a new Thelma component:
+`yo thelma:seed [element-name]`
+
+## Generators
+
+Available generators:
+
+- [thelma:lenses](#lenses)
+- [thelma:seed](#seed)
+- [thelma:gh](#gh)
+
+**Note: Generators are to be run from the root of your app**
+
+### Lenses
+Generates the Lens Composer and the components that can be used with Lenses. Coming soon. 
+
+### Seed
+Generates a reusable Thelma element. 
+
+The seed-element generator will construct a new element _and_ its directory for
+you. Be aware: all bower dependencies will be installed as _siblings_ of the
+newly generated element. Make sure that you generate the seed element within a
+directory that is intended to contain multiple components!
+
+Example:
 ```bash
-npm install -g yo
+mkdir -p components && cd $_
+yo thelma:seed my-element
 ```
 
-### Yeoman Generators
+### Gh
+Generates a Github pages branch for your [seed-element](#seed).
 
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
-
-To install generator-thelma from npm, run:
-
+Example:
 ```bash
-npm install -g generator-thelma
+cd components/my-element
+yo thelma:gh
 ```
 
-Finally, initiate the generator:
+## Contribute
 
-```bash
-yo thelma
-```
+See the [contributing docs](https://github.com/yeoman/yeoman/blob/master/contributing.md)
 
-### Getting To Know Yeoman
-
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
-
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
-
+When submitting an issue, please follow the [guidelines](https://github.com/yeoman/yeoman/blob/master/contributing.md#issue-submission). Especially important is to make sure Yeoman is up-to-date, and providing the command or commands that cause the issue.
 
 ## License
 
-MIT
+[BSD license](http://opensource.org/licenses/bsd-license.php)

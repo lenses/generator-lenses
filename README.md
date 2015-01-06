@@ -29,8 +29,6 @@ Available generators:
 - [thelma:seed](#seed)
 - [thelma:gh](#gh)
 
-**Note: Generators are to be run from the root of your app**
-
 ### Lenses
 Generates the Lens Composer and the components that can be used with Lenses. Coming soon. 
 

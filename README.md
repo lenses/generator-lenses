@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Thelma web components are built using the [Polymer](http://www.polymer-project.org/) library. The project allows developers to retreive, manipulate and visualize data by chaining these components together. 
+Thelma web components are built using the [Polymer](http://www.polymer-project.org/) library. The project allows developers to retrieve, manipulate and visualize data by chaining these components together. 
 
 `generator-thelma` provides Thelma component scaffolding using [Yeoman](http://yeoman.io) (a scaffolding tool for the web), letting you easily create and customize Thelma (custom) elements via the command-line and import them using HTML Imports. This saves you time writing boilerplate code so you can start writing up the logic to your components straight away.
 

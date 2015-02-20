@@ -116,7 +116,8 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
     this.template('_index.html', 'index.html');
     this.template('_test/_index.html', 'test/index.html');
     this.template('_test/_seed-element-basic.html',
-                  'test/' + this.elementName + '-basic.html');    this.template('_element-name.css', this.elementName + '.css');
+                  'test/' + this.elementName + '-basic.html');
+    this.template('_element-name.css', this.elementName + '.css');
     this.template('_element-name.html', this.elementName + '.html');
     this.template('_demo.html', 'demo.html');
   },

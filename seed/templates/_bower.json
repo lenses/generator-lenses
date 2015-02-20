@@ -8,6 +8,9 @@
     "th-animated": "thelmanews/th-animated#master", <% } %>  
     "th-theme": "thelmanews/th-theme",
     "polymer": "Polymer/polymer#~0.5.1"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^1.4.2"
   }
 }
 

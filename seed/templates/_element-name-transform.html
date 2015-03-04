@@ -2,7 +2,7 @@
 <link rel="import" href="../core-collapse/core-collapse.html">
 
 <!-- this may soon be removed -->
-<link rel="import" href="core-icon-button.html">
+<link rel="import" href="../core-icon-button/core-icon-button.html">
 
 <!--
 A Thelma component
@@ -12,7 +12,7 @@ A Thelma component
     <<%= elementName %>></<%= elementName %>>
 
 @element <%= elementName %>
-@blurb A Thelma component
+@blurb A Thelma component that transforms data
 @status alpha
 @author <%= author %>
 @homepage http://<%= ghUser %>.github.io/<%= elementName %>
@@ -22,7 +22,7 @@ A Thelma component
   <template>
     <link rel="stylesheet" href="<%= elementName %>.css">
     <div class="th-container">
-
+      <h1><%= elementName %></h1>
       <template if="{{!included}}">
         <core-icon-button icon="perm-data-setting" on-click="{{showControls}}"></core-icon-button>
       </template>
@@ -34,7 +34,7 @@ A Thelma component
   </template>
 
   <script>
-    Polymer({
+    Polymer('<%= elementName %>', {
 
       /**
        * Input data
@@ -75,17 +75,19 @@ A Thelma component
         this.$.ctrl_collapse.toggle();
       },
 
-      inputchanged: function() {
+      inputChanged: function() {
         // do something with new input here
 
         this._calculateoutput();
       },
 
-      _calculateoutput: function() {
+      _calculateOutput: function() {
         // calculate new output here
 
-        // fire th-output-ready event
-        this.fire("th-output-ready");
+      },
+
+      outputChanged: function(){
+        this.fire('th-output-changed', this);
       }
 
     });

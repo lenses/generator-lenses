@@ -1,71 +1,58 @@
 <link rel="import" href="../polymer/polymer.html"> 
-<link rel="import" href="../th-theme/th-theme.html"> <% if(d3chart){ %>
-<link rel="import" href="../th-d3-chart/th-d3-chart.html"> <% } else if(animated) { %>
-<link rel="import" href="../th-animated/th-animated.html"> <% } %>
 
 <!--
-A Thelma component providing solution to no problem in particular.
-this is an INPUT!!!
+A Thelma component for input
+
 ##### Example
 
     <<%= elementName %>></<%= elementName %>>
 
 @element <%= elementName %>
-@blurb Element providing solution to no problem in particular.
+@blurb A Thelma component
 @status alpha
+@author <%= author %>
 @homepage http://<%= ghUser %>.github.io/<%= elementName %>
 -->
 
-<polymer-element name="<%= elementName %>"<% if(d3chart){%> extends="th-d3-chart" <% } else if(animated) { %> extends="th-animated" <% } %> attributes="author fancy">
+<polymer-element name="<%= elementName %>" attributes="output">
+
   <template>
-    <core-style ref="theme"></core-style>
     <link rel="stylesheet" href="<%= elementName %>.css">
-    <h1>Hello from <%= elementName %></h1>
-    <content></content>
+    <div class="th-container">
+      <h1><%= elementName %></h1>
+      <content></content>
+    </div>
   </template>
   <script>
-    Polymer({
+    Polymer('<%= elementName %>', {
       /**
-       * The `author` attribute sets an initial author
+       * Output data
        *
-       * @attribute author
-       * @type string
-       * @default 'Nisha Batra'
+       * @property output
+       * @type object
+       * @default undefined
        */
-      author: 'Nisha Batra',
+      output: undefined,
 
-      /**
-       * `fancy` is a property that does something fancy.
-       *
-       * @property fancy
-       * @type bool
-       * @default false
-       */
-      fancy: false,
+      // Observe changes on below attributes and trigger _calculateOutput() when changed
+      observe: {
+        // nameOfAttribute: "_calculateOutput",
+      },
 
       ready: function () {
         // Ready is a lifecycle callback.
         // You can do setup work in here.
         // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
-      <% if(d3chart || animated){ %>},
-      animate: function(){
-        // Animate is a method inherited from the 'th-animated' Thelma component.
-        // You can include code that animates the element here.
-        // Along with it come two attributes, which can be set to time the animation:
-        //   'animateOnInit': accepts a boolean value; if true, animate() will be called when the component is initialized.
-        //   'animateAfter':  accepts a value representing number of milleseconds; if set, animate() will be called 
-        //                    X milleseconds after the component is initialized. 
       },
-      reset: function(){
-        // Reset is a method inherited from the 'th-animated' Thelma component.
-        // You can include code that takes the component back to the pre-animated state.
 
-      <% if(d3chart){ %>},
-      resize: function(){
-        // Resize is a callback inherited from the 'th-d3-chart' Thelma component.
-        // It is triggered when the component is resized. 
-        // You can include any size-dependent work here.
-     <% } %> <% } %>}
+      _calculateOutput: function() {
+        // calculate new output here
+      },
+
+      outputChanged: function(){
+        this.fire('th-output-ready', this);
+      }
+
     });
   </script>
 </polymer-element>

@@ -124,6 +124,7 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
     this.copy('_bowerrc', '.bowerrc');
     this.copy('_jshintrc', '.jshintrc');
     this.copy('_editorconfig', '.editorconfig');
+    this.template('_wct.conf.js', 'wct.conf.js');
     this.template('_bower.json', 'bower.json');
     this.template('_README.md', 'README.md');
     this.template('_index.html', 'index.html');

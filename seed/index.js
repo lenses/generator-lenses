@@ -82,7 +82,14 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'ghUser',
-      message: 'What is your GitHub username?'
+      type: 'input',
+      message: 'What is your GitHub username?',
+      default: 'thelmanews'
+    },{
+      name: 'author',
+      type: 'input',
+      message: 'Name of author?',
+      default: 'Thelma team'
     },{
       type: 'confirm',
       name: 'd3chart',
@@ -92,14 +99,20 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
       type: 'confirm',
       name: 'animated',
       message: 'Will your component contain any animation?',
-      default: true
+      default: false
+    },{
+      type: 'list',
+      name: 'componentType',
+      message: 'What type of component is this?',
+      choices: [ 'input', 'transform', 'output' ]
     }];
 
     this.prompt(prompts, function (props) {
       this.ghUser = props.ghUser;
+      this.author = props.author;
       this.d3chart = props.d3chart;
       this.animated = props.animated;
-
+      this.componentType = props.componentType;
       done();
     }.bind(this));
   },
@@ -118,7 +131,7 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
     this.template('_test/_seed-element-basic.html',
                   'test/' + this.elementName + '-basic.html');
     this.template('_element-name.css', this.elementName + '.css');
-    this.template('_element-name.html', this.elementName + '.html');
+    this.template('_element-name-'+this.componentType+'.html', this.elementName + '.html');
     this.template('_demo.html', 'demo.html');
   },
 

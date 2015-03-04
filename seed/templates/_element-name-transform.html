@@ -1,0 +1,93 @@
+<link rel="import" href="../polymer/polymer.html"> 
+<link rel="import" href="../core-collapse/core-collapse.html">
+
+<!-- this may soon be removed -->
+<link rel="import" href="core-icon-button.html">
+
+<!--
+A Thelma component
+
+##### Example
+
+    <<%= elementName %>></<%= elementName %>>
+
+@element <%= elementName %>
+@blurb A Thelma component
+@status alpha
+@author <%= author %>
+@homepage http://<%= ghUser %>.github.io/<%= elementName %>
+-->
+
+<polymer-element name="<%= elementName %>" attributes="input output">
+  <template>
+    <link rel="stylesheet" href="<%= elementName %>.css">
+    <div class="th-container">
+
+      <template if="{{!included}}">
+        <core-icon-button icon="perm-data-setting" on-click="{{showControls}}"></core-icon-button>
+      </template>
+
+      <!--core-collapse shows table settings. Toggled off by default-->
+      <core-collapse id="ctrl_collapse" opened="false">
+      </core-collapse>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      /**
+       * Input data
+       *
+       * @property input
+       * @type object
+       * @default undefined
+       */
+      input: undefined,
+
+      /**
+       * Output data
+       *
+       * @property output
+       * @type object
+       * @default undefined
+       */
+      output: undefined,
+
+      // Observe changes on below attributes and trigger _calculateOutput() when changed
+      observe: {
+        // nameOfAttribute: "_calculateOutput",
+      },
+
+      ready: function () {
+        // Ready is a lifecycle callback.
+        // You can do setup work in here.
+        // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
+      },
+
+      /**
+       *  Toggles whether the settings box is open or closed.
+       *  Defaults to closed.
+       *  
+       *  @method showControls
+       */
+      showControls: function(e) {
+        this.$.ctrl_collapse.toggle();
+      },
+
+      inputchanged: function() {
+        // do something with new input here
+
+        this._calculateoutput();
+      },
+
+      _calculateoutput: function() {
+        // calculate new output here
+
+        // fire th-output-ready event
+        this.fire("th-output-ready");
+      }
+
+    });
+  </script>
+</polymer-element>

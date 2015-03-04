@@ -43,7 +43,9 @@ A Thelma component for displaying output
         // Ready is a lifecycle callback.
         // You can do setup work in here.
         // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
-      <% if(d3chart || animated){ %>},
+      },
+
+      <% if(d3chart || animated){ %>
       animate: function(){
         // Animate is a method inherited from the 'th-animated' Thelma component.
         // You can include code that animates the element here.
@@ -55,14 +57,14 @@ A Thelma component for displaying output
       reset: function(){
         // Reset is a method inherited from the 'th-animated' Thelma component.
         // You can include code that takes the component back to the pre-animated state.
-
-      <% if(d3chart){ %>},
+      },
+      <% if(d3chart){ %>
       resize: function(){
         // Resize is a callback inherited from the 'th-d3-chart' Thelma component.
         // It is triggered when the component is resized. 
         // You can include any size-dependent work here.
-     <% } %> <% } %>},
-
+      },
+     <% } %> <% } %>
      inputChanged: function() {
         // do something with new input here
       },

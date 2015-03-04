@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html"> 
-
+<link rel="import" href="../th-theme/th-theme.html"> 
 <!--
 A Thelma component for input
 
@@ -17,6 +17,7 @@ A Thelma component for input
 <polymer-element name="<%= elementName %>" attributes="output">
 
   <template>
+    <core-style ref="theme"></core-style>
     <link rel="stylesheet" href="<%= elementName %>.css">
     <div class="th-container">
       <h1><%= elementName %></h1>

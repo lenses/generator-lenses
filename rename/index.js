@@ -41,41 +41,7 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
     }
   },
 
-  // checkForDanger: function () {
-  //   var done = this.async();
-
-  //   // Because the element installs its dependencies as siblings, we want to
-  //   // make it clear to the user that it is potentially dangerous to generate
-  //   // their element from workspace containing other directories.
-  //   var entries = this.expand('*');
-  //   var bowerEntries = _.map(this.expand('*/bower.json'), path.dirname);
-  //   var nonComponents = _.difference(entries, bowerEntries);
-
-  //   // Whew, everything looks like a bower component!
-  //   if (nonComponents.length === 0) {
-  //     done();
-  //     return;
-  //   }
-
-  //   console.warn(
-  //     'You are generating your element in a workspace that appears to contain data\n' +
-  //     'other than web components. This is potentially dangerous, as your element\'s\n' +
-  //     'dependencies will be installed in the current directory. Bower will\n' +
-  //     'overwrite any conflicting directories.\n'
-  //   );
-
-  //   var prompts = [{
-  //     name: 'livesDangerously',
-  //     message: 'Are you ok with that?',
-  //     default: 'no',
-  //   }];
-
-  //   this.prompt(prompts, function (props) {
-  //     if (props.livesDangerously[0] !== 'n') {
-  //       done();
-  //     }
-  //   }.bind(this));
-  // },
+  
   prompting: function () {
     var done = this.async();
 
@@ -91,7 +57,7 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
       default: 'thelmanews'
     },
     {
-      name: 'replaceTH',
+      name: 'replaceTHs',
       type: 'input',
       message: 'Do you want all the th-* refrences to be updated as well? (yes/no)',
       default: 'yes'
@@ -100,6 +66,7 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
 
     this.prompt(prompts, function (props) {
       this.ghUser = props.ghUser;
+      this.replaceTHs = props.replaceTHs;
       done();
     }.bind(this));
   },
@@ -136,9 +103,40 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
 
         if(fileItem.checkContent) {
           processFunction = function(content) {
-                var re = new RegExp(this.elementName,"g");
-                var newContent = content.toString().replace(re, this.newElementName);
-                //console.log('\n ----- NEW CONTENT----',newContent);
+                var re = new RegExp(this.elementName,'g'),
+                contentStr = content.toString();
+
+                var newContent = contentStr.replace(re, this.newElementName);
+
+                /*
+                if(this.replaceTHs) {
+                  var thre = new RegExp('th-(:?[a-z0-9\-]+)','g'),
+                      results = thre.exec(newContent);
+                      console.log('results',  results ? results.length : 'no results');
+                      if(results)
+                      {
+                        for(var i=0; i<results.length; i++) {
+                            console.log('result ',results[i]);
+
+                            var done = this.async();
+
+                            var prompt = {name: results[i],
+                                          type: 'input',
+                                          message: 'Do you want ' + results[i],
+                                          default: 'yes'};
+
+                            this.prompt(prompt, function (props) {
+                              console.log(props)
+                              done();
+      
+                            }.bind(this));
+
+                        }
+                      }
+
+                }
+                */
+
                 return newContent;
 
           }.bind(this);

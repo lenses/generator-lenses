@@ -9,9 +9,9 @@
     "url": "git://github.com/lenses/generator-thelma.git"
   },
   "author": {
-    "name": "Nisha Batra",
+    "name": "Thelma Team",
     "email": "",
-    "url": "https://github.com/nishacodes"
+    "url": "https://github.com/thelmanews"
   },
   "engines": {
     "node": ">=0.10.0"

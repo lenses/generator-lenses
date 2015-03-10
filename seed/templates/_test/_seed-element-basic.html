@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= elementName %></title>
+
+  <script src="../../webcomponentsjs/webcomponents.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <!-- Step 1: import the element to test -->
+  <link rel="import" href="../<%= elementName %>.html">
+
+</head>
+<body>
+
+  <<%= elementName %> id="fixture"></<%= elementName %>>
+
+  <script>
+    var should = chai.should();
+    var myEl = document.getElementById("fixture");
+
+    // the event listener callback will be added / removed in every async test
+    var callback = function() {};
+
+    // some input data
+    var input = new Object([{"label":"Marshawn Lynch, RB"},{"label":"Dez Bryant, WR"},{"label":"Jamaal Charles, RB"}]);
+
+    suite("<<%= elementName %>>", function() {
+
+      test("component can be created as an object", function(done) {
+        should.exist(myEl);
+        done();
+      });
+
+      test("accepts input", function(done) {
+
+        // set the event listener callback
+        myEl.removeEventListener("th-output-ready", callback);
+        callback = function(e) {
+          myEl.input.should.equal(input);
+        };
+        myEl.addEventListener("th-output-ready", callback);
+
+        // change input
+        myEl.input = input;
+
+        // fire th-output-ready event
+        asyncPlatformFlush(function() {
+          done();
+        });
+      });
+
+      // repeat as needed
+      test("change an argument, fire outputReady, output new result", function(done) {
+
+        // myEl.removeEventListener("th-output-ready", callback);
+        // callback = function(e) {
+        //   // // check that the argument has been changed
+        //   // myEl.splitCol.should.equal(splitCol);
+
+        //   // // check that the output has been changed
+        //   // var player = myEl.output[0].split1;
+        //   // var pos = myEl.output[0].split2;
+        //   // player.should.equal("Marshawn Lynch");
+        //   // pos.should.equal("RB");
+        // };
+        // myEl.addEventListener("th-output-ready", callback);
+
+        // // change an argument
+        // myEl.splitCol = splitCol;
+
+        // fire th-output-ready event
+        asyncPlatformFlush(function() {
+          done();
+        });
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>

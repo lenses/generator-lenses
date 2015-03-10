@@ -3,11 +3,19 @@
   "version": "0.0.0",
   "keywords": "thelma, polymer, web-components",
   "main": "<%= elementName %>.html",
-  "dependencies": {<% if(d3chart){ %>
+  "dependencies": {
+    <% if(componentType === 'transform') { %>
+    "core-collapse": "Polymer/core-collapse#~0.5.5",
+    "core-icon-button": "Polymer/core-icon-button#^0.5.5",
+    <% } %>
+    <% if(d3chart) {%>
     "th-d3-chart": "thelmanews/th-d3-chart#master", <% } else if(animated) { %>
-    "th-animated": "thelmanews/th-animated#master", <% } %>  
-    "th-theme": "thelmanews/th-theme",
+    "th-animated": "thelmanews/th-animated#master", <% } %>
+    "core-component-page" : "Polymer/core-component-page#^0.5.5",
+    "th-theme": "thelmanews/th-theme#*",
     "polymer": "Polymer/polymer#~0.5.1"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^1.4.2"
   }
 }
-

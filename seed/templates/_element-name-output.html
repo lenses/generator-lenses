@@ -1,0 +1,74 @@
+<link rel="import" href="../polymer/polymer.html"> 
+<link rel="import" href="../th-theme/th-theme.html"> 
+<% if(d3chart){ %>
+<link rel="import" href="../th-d3-chart/th-d3-chart.html"> <% } else if(animated) { %>
+<link rel="import" href="../th-animated/th-animated.html"> <% } %>
+
+<!--
+A Thelma component for displaying output
+
+##### Example
+
+    <<%= elementName %>></<%= elementName %>>
+
+@element <%= elementName %>
+@blurb A Thelma component that displays output
+@status alpha
+@author <%= author %>
+@homepage http://<%= ghUser %>.github.io/<%= elementName %>
+-->
+
+<polymer-element name="<%= elementName %>"<% if(d3chart){%> extends="th-d3-chart" <% } else if(animated) { %> extends="th-animated" <% } %> attributes="input">
+  <template>
+    <core-style ref="theme"></core-style>
+    <link rel="stylesheet" href="<%= elementName %>.css">
+    <div class="th-container">
+      <h1><%= elementName %></h1>
+      <content></content>
+    </div>
+  </template>
+  <script>
+    Polymer('<%= elementName %>', {
+
+      /**
+       * Input data
+       *
+       * @property input
+       * @type object
+       * @default undefined
+       */
+      input: undefined,
+
+      ready: function () {
+        // Ready is a lifecycle callback.
+        // You can do setup work in here.
+        // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
+      },
+
+      <% if(d3chart || animated){ %>
+      animate: function(){
+        // Animate is a method inherited from the 'th-animated' Thelma component.
+        // You can include code that animates the element here.
+        // Along with it come two attributes, which can be set to time the animation:
+        //   'animateOnInit': accepts a boolean value; if true, animate() will be called when the component is initialized.
+        //   'animateAfter':  accepts a value representing number of milleseconds; if set, animate() will be called 
+        //                    X milleseconds after the component is initialized. 
+      },
+      reset: function(){
+        // Reset is a method inherited from the 'th-animated' Thelma component.
+        // You can include code that takes the component back to the pre-animated state.
+      },
+      <% if(d3chart){ %>
+      resize: function(){
+        // Resize is a callback inherited from the 'th-d3-chart' Thelma component.
+        // It is triggered when the component is resized. 
+        // You can include any size-dependent work here.
+      },
+     <% } %> <% } %>
+     inputChanged: function() {
+        // do something with new input here
+      },
+
+    });
+  </script>
+</polymer-element>

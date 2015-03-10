@@ -1,0 +1,59 @@
+<link rel="import" href="../polymer/polymer.html"> 
+<link rel="import" href="../th-theme/th-theme.html"> 
+<!--
+A Thelma component for input
+
+##### Example
+
+    <<%= elementName %>></<%= elementName %>>
+
+@element <%= elementName %>
+@blurb A Thelma component
+@status alpha
+@author <%= author %>
+@homepage http://<%= ghUser %>.github.io/<%= elementName %>
+-->
+
+<polymer-element name="<%= elementName %>" attributes="output">
+
+  <template>
+    <core-style ref="theme"></core-style>
+    <link rel="stylesheet" href="<%= elementName %>.css">
+    <div class="th-container">
+      <h1><%= elementName %></h1>
+      <content></content>
+    </div>
+  </template>
+  <script>
+    Polymer('<%= elementName %>', {
+      /**
+       * Output data
+       *
+       * @property output
+       * @type object
+       * @default undefined
+       */
+      output: undefined,
+
+      // Observe changes on below attributes and trigger _calculateOutput() when changed
+      observe: {
+        // nameOfAttribute: "_calculateOutput",
+      },
+
+      ready: function () {
+        // Ready is a lifecycle callback.
+        // You can do setup work in here.
+        // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
+      },
+
+      _calculateOutput: function() {
+        // calculate new output here
+      },
+
+      outputChanged: function(){
+        this.fire('th-output-ready', this);
+      }
+
+    });
+  </script>
+</polymer-element>

@@ -5,6 +5,11 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var path = require('path');
 
+var ncp = require('ncp');
+var spawn = require('child_process').spawn;
+var rimraf = require('rimraf');
+
+
 var ThelmaGenerator = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
@@ -39,6 +44,12 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
         'ex: yo thelma:seed my-element'
       ));
     }
+    if (this.newElementName.indexOf('-') === -1) {
+      this.emit('error', new Error(
+        'New lement name must contain a dash "-"\n' +
+        'ex: yo thelma:seed my-element'
+      ));
+    }
   },
 
   
@@ -57,23 +68,31 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
       default: 'thelmanews'
     },
     {
-      name: 'replaceTHs',
+      name: 'customReplace',
       type: 'input',
-      message: 'Do you want all the th-* refrences to be updated as well? (yes/no)',
-      default: 'yes'
-    }
-    ];
+      message: 'Any blind string replace? (e.g. str1:str1New,str2:str2New)',
+      default: 'th-data-utility:lens-u-data-utility,th-u-data-selector:lens-u-data-selector,th-container:lens-container'
+    }];
 
     this.prompt(prompts, function (props) {
       this.ghUser = props.ghUser;
-      this.replaceTHs = props.replaceTHs;
+      //this.replaceTHs = props.replaceTHs;
+
+      var replaceItems = props.customReplace.split(',');
+      this.replaceItems = replaceItems.map(function(item) {
+        var segs = item.split(':');
+        return {from: segs[0], to: segs[1]}
+      });
+
       done();
     }.bind(this));
   },
+
+
   rename: function () {
 
          // this.sourceRoot(this.elementName);
-          this.destinationRoot(this.elementName);
+         // this.destinationRoot(this.elementName);
 
 
       var newPathPrefix = this.newElementName+'/',
@@ -82,6 +101,7 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
             {src: 'demo.html', dest: 'demo.html', checkContent: true},
             {src: 'bower.json', dest: 'bower.json', checkContent: true},
             {src: 'README.md', dest: 'README.md', checkContent: true},
+            {src: 'metadata.html', dest: 'metadata.html', checkContent: true},
 
             {src: this.elementName+'.css', dest: this.newElementName+'.css'},
 
@@ -94,7 +114,7 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
       fileList.forEach(function(fileItem) {
 
         var path   =   fileItem.src,
-            newPath = '../' + newPathPrefix + fileItem.dest,
+            newPath =  fileItem.dest,
             processFunction = null;
 
         console.log(path, newPath);
@@ -108,34 +128,13 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
 
                 var newContent = contentStr.replace(re, this.newElementName);
 
-                /*
-                if(this.replaceTHs) {
-                  var thre = new RegExp('th-(:?[a-z0-9\-]+)','g'),
-                      results = thre.exec(newContent);
-                      console.log('results',  results ? results.length : 'no results');
-                      if(results)
-                      {
-                        for(var i=0; i<results.length; i++) {
-                            console.log('result ',results[i]);
+                this.replaceItems.forEach(function(replaceItem) {
+                    var itemRe = new RegExp(replaceItem.from,'g');
+                    newContent = newContent.replace(itemRe, replaceItem.to);
 
-                            var done = this.async();
+                });
 
-                            var prompt = {name: results[i],
-                                          type: 'input',
-                                          message: 'Do you want ' + results[i],
-                                          default: 'yes'};
-
-                            this.prompt(prompt, function (props) {
-                              console.log(props)
-                              done();
-      
-                            }.bind(this));
-
-                        }
-                      }
-
-                }
-                */
+                
 
                 return newContent;
 
@@ -153,10 +152,43 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
 
 
       }.bind(this));
-      
+
+
 
    
-  }
+  },
+
+  gh: function () {
+    var done = this.async();
+    var src = this.sourceRoot();//path.join(__dirname, '');
+    var dest = this.destinationRoot();//path.join(process.cwd());//, 'tmp-' + Date.now());
+
+    console.log('src,dest ',src, dest);
+
+    // work around weird timing issues with this.copy...
+    ncp(src, dest, function (err) {
+      if (err) {
+        return this.log(err);
+      }
+
+      var gp = spawn('sh', ['git.sh', this.ghUser, this.elementName, this.newElementName], {cwd: dest});
+
+      gp.stdout.on('data', function (data) {
+        this.log(data.toString());
+      }.bind(this));
+
+      gp.stderr.on('data', function (data) {
+        this.log(data.toString());
+      }.bind(this));
+
+      gp.on('close', function (code) {
+        this.log('child process exited with code ' + code);
+        rimraf.sync(dest);
+        done();
+      }.bind(this));
+    }.bind(this));
+  }  
+
 
 
 });

@@ -17,4 +17,4 @@ git rm test/$oldName.html
 
 git commit . -m 'renaming'
 
-git push origin lens-rename
+#git push origin lens-rename

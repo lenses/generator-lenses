@@ -71,7 +71,7 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
       name: 'customReplace',
       type: 'input',
       message: 'Any blind string replace? (e.g. str1:str1New,str2:str2New)',
-      default: 'th-data-utility:lens-u-data-utility,th-u-data-selector:lens-u-data-selector,th-container:lens-container'
+      default: 'th-data-utility:lens-u-data-utility,th-u-data-selector:lens-u-data-selector,th-container:lens-container,thelmanews.github.io:lenses.github.io'
     }];
 
     this.prompt(prompts, function (props) {
@@ -93,6 +93,8 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
 
          // this.sourceRoot(this.elementName);
          // this.destinationRoot(this.elementName);
+         // 
+     //var done = this.async();
 
 
       var newPathPrefix = this.newElementName+'/',
@@ -109,6 +111,7 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
 
             {src: 'test/index.html', dest: 'test/index.html', checkContent: true},
             {src: 'test/'+this.elementName+'.html', dest: 'test/'+this.newElementName+'.html', checkContent: true},
+            {src: 'test/'+this.elementName+'-basic.html', dest: 'test/'+this.newElementName+'-basic.html', checkContent: true},
           ];
 
       fileList.forEach(function(fileItem) {
@@ -127,6 +130,10 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
                 contentStr = content.toString();
 
                 var newContent = contentStr.replace(re, this.newElementName);
+
+                if(fileItem.src==='bower.json' || fileItem.src==='metadata.html') {
+                  newContent = newContent.replace('thelma,','lenses,');
+                }
 
                 this.replaceItems.forEach(function(replaceItem) {
                     var itemRe = new RegExp(replaceItem.from,'g');
@@ -154,11 +161,17 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
       }.bind(this));
 
 
+     // done();
+
+
 
    
   },
 
   gh: function () {
+
+    /*
+    
     var done = this.async();
     var src = this.sourceRoot();//path.join(__dirname, '');
     var dest = this.destinationRoot();//path.join(process.cwd());//, 'tmp-' + Date.now());
@@ -187,7 +200,14 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
         done();
       }.bind(this));
     }.bind(this));
+
+*/
+
+
   }  
+
+
+
 
 
 

@@ -1,6 +1,4 @@
 <link rel="import" href="../polymer/polymer.html"> 
-<link rel="import" href="../core-collapse/core-collapse.html">
-<link rel="import" href="../th-theme/th-theme.html"> 
 
 <% if(d3chart){ %>
 <link rel="import" href="../th-d3-chart/th-d3-chart.html"> <% } else if(animated) { %>
@@ -26,17 +24,9 @@ A Thelma component
 <polymer-element name="<%= elementName %>" <% if(d3chart){%> extends="th-d3-chart" <% } else if(animated) { %> extends="th-animated" <% } %> attributes="input output">
   <template>
     <link rel="stylesheet" href="<%= elementName %>.css">
-    <core-style ref="theme"></core-style>
 
     <div class="th-container">
-      <h1><%= elementName %></h1>
-      <template if="{{!included}}">
-        <core-icon-button icon="perm-data-setting" on-click="{{showControls}}"></core-icon-button>
-      </template>
 
-      <!--core-collapse shows table settings. Toggled off by default-->
-      <core-collapse id="ctrl_collapse" opened="false">
-      </core-collapse>
     </div>
   </template>
 

@@ -17,7 +17,8 @@ module.exports = yeoman.generators.Base.extend({
     var prompts = [
       {
         name: 'ghUser',
-        message: 'What is your GitHub username?'
+        message: 'What is your GitHub username?',
+	default: 'lenses'
       },
       {
         name: 'elementName',

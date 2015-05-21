@@ -1,39 +1,39 @@
-# Yeoman generator for Thelma components
+# Yeoman generator for Lenses components
 
 ## Introduction
 
-Thelma web components are built using the [Polymer](http://www.polymer-project.org/) library. The project allows developers to retrieve, manipulate and visualize data by chaining these components together. 
+Lenses web components are built using the [Polymer](http://www.polymer-project.org/) library. The project allows developers to retrieve, manipulate and visualize data by chaining these components together. 
 
-`generator-thelma` provides Thelma component scaffolding using [Yeoman](http://yeoman.io) (a scaffolding tool for the web), letting you easily create and customize Thelma (custom) elements via the command-line and import them using HTML Imports. This saves you time writing boilerplate code so you can start writing up the logic to your components straight away.
+`generator-lenses` provides Lenses component scaffolding using [Yeoman](http://yeoman.io) (a scaffolding tool for the web), letting you easily create and customize Lenses (custom) elements via the command-line and import them using HTML Imports. This saves you time writing boilerplate code so you can start writing up the logic to your components straight away.
 
 ## Features
-* Sub-generator to create Thelma elements for your app
+* Sub-generator to create Lenses elements for your app
 * Quick deploy to GitHub pages
 
 ## Installation
 
 Install the generator
-`npm install -g generator-thelma`
+`npm install -g generator-lenses`
 
 Make a new directory and cd into it
 `mkdir -p my-project && cd $_`
 
-Generate a new Thelma component:
-`yo thelma:seed [element-name]`
+Generate a new Lenses component:
+`yo lenses:seed [element-name]`
 
 ## Generators
 
 Available generators:
 
-- [thelma:lenses](#lenses)
-- [thelma:seed](#seed)
-- [thelma:gh](#gh)
+- [lenses:lenses](#lenses)
+- [lenses:seed](#seed)
+- [lenses:gh](#gh)
 
 ### Lenses
 Generates the Lens Composer and the components that can be used with Lenses. Coming soon. 
 
 ### Seed
-Generates a reusable Thelma element. 
+Generates a reusable Lenses element. 
 
 The seed-element generator will construct a new element _and_ its directory for
 you. Be aware: all bower dependencies will be installed as _siblings_ of the
@@ -43,7 +43,7 @@ directory that is intended to contain multiple components!
 Example:
 ```bash
 mkdir -p components && cd $_
-yo thelma:seed my-element
+yo lenses:seed my-element
 ```
 
 ### Gh
@@ -52,7 +52,7 @@ Generates a Github pages branch for your [seed-element](#seed).
 Example:
 ```bash
 cd components/my-element
-yo thelma:gh
+yo lenses:gh
 ```
 
 ## Contribute

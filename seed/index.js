@@ -77,30 +77,21 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the ' + chalk.red('Thelma') + ' custom web component generator!'
+      'Welcome to the ' + chalk.red('Lenses') + ' custom web component generator!'
     ));
 
     var prompts = [{
       name: 'ghUser',
       type: 'input',
       message: 'What is your GitHub username?',
-      default: 'thelmanews'
+      default: 'lenses'
     },{
       name: 'author',
       type: 'input',
       message: 'Name of author?',
-      default: 'Thelma team'
-    },{
-      type: 'confirm',
-      name: 'd3chart',
-      message: 'Will your component require the D3 JavaScript library?',
-      default: false
-    },{
-      type: 'confirm',
-      name: 'animated',
-      message: 'Will your component contain any animation?',
-      default: false
-    },{
+      default: 'Lenses team'
+    },
+    {
       type: 'list',
       name: 'componentType',
       message: 'What type of component is this?',
@@ -110,8 +101,6 @@ var ThelmaGenerator = yeoman.generators.Base.extend({
     this.prompt(prompts, function (props) {
       this.ghUser = props.ghUser;
       this.author = props.author;
-      this.d3chart = props.d3chart;
-      this.animated = props.animated;
       this.componentType = props.componentType;
       done();
     }.bind(this));

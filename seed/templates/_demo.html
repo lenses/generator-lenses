@@ -12,12 +12,36 @@
         font-size: 14px;
       }
 
+      .logo {
+        background: url('https://avatars3.githubusercontent.com/u/8629151?v=3&s=50') 0 0 no-repeat;
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        float: left;
+        margin-left: 5px;
+        margin-right: 15px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+
+      a, a:visited {
+        color: #333;
+      }
+
+      h1 {
+        font-size: 18px;
+        font-family: monaco;
+      }
+
       pre {
         border: 1px solid #EEE;
         font-size: 12px;
-        max-width: 300px;
+        width: 300px;
         max-height: 300px;
         overflow: scroll;
+        min-height: 50px;
 
       }
       #component {
@@ -33,12 +57,19 @@
         position: absolute;
         top: 50%;
       }
+
       .component::before {
-        right: -15px;
+        left: -15px;
+        <% if(componentType!=='output') {%>
+        display: none;
+        <% } %>
       }
 
       .component::after {
-        left: -15px;
+        right: -15px;
+        <% if(componentType!=='input') {%>
+        display: none;
+        <% } %>
       }
 
       section {
@@ -49,6 +80,11 @@
       }
       html /deep/ input[is=core-input] {
         border-bottom: 1px solid #E5E5E5 !important;
+      }
+
+      .count {
+        float: right;
+        font-size: 12px;
       }
 
     </style>
@@ -62,12 +98,22 @@
 
   </head>
   <body unresolved>
+
+    <div class="logo">
+    </div> 
+    <h1>lens-data-crossfilter</h1>
+    <p>
+      A '<a href="http://lenses.github.io/lenses-freeform/components/lenses-freeform/" target="_blank">lenses</a>'' component. Source on <a href="https://github.com/<%=ghUser %>/<%= elementName %>" target="_blank">Github</a>
+    </p>
+
     <template id="auto-bind-demo" is="auto-binding">
 
+      <% if(componentType!=='input') {%>
       <section>
         <label>Input:</label>
         <pre id="input">{{myinput | json}}</pre>
       </section>
+      <% } %>
 
 
       <section class="component">
@@ -75,10 +121,12 @@
           <<%= elementName %> id="component" output="{{myoutput}}" ></<%= elementName %>>
       </section>
 
+      <% if(componentType!=='output') {%>
       <section>
         <label>Result:</label>
         <pre id="output">{{myoutput | json}}</pre>
       </section>
+      <% } %>
 
     </template>
   </body>

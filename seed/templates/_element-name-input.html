@@ -18,7 +18,7 @@ A Thelma component for input
   <template>
     <link rel="stylesheet" href="<%= elementName %>.css">
     <div class="th-container">
-	<label class="label">label</label>
+	    <label class="label">label</label>
     	<input type="text">		
     </div>
   </template>
@@ -49,7 +49,7 @@ A Thelma component for input
       },
 
       outputChanged: function(){
-        this.fire('th-output-ready', this);
+        this.fire('lens-output-ready', this);
       }
 
     });

@@ -5,8 +5,8 @@
   "license": "MIT",
   "main": "<%= elementName %>.html",
   "dependencies": {
-    "core-component-page" : "Polymer/core-component-page#^0.5.5",
-    "polymer": "Polymer/polymer#~0.5.1"
+    "polymer": "Polymer/polymer#~0.5.1",
+    "core-component-page" : "Polymer/core-component-page#^0.5.5"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^1.4.2"

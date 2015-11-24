@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title><%= elementName %> Demo</title>
-    <script src="../webcomponentsjs/webcomponents.js"></script>
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
     <link rel="import" href="<%= elementName %>.html">
 
     <style>
@@ -101,7 +101,7 @@
 
     <div class="logo">
     </div> 
-    <h1>lens-data-crossfilter</h1>
+    <h1><%= elementName %></h1>
     <p>
       A '<a href="http://lenses.github.io/lenses-freeform/components/lenses-freeform/" target="_blank">lenses</a>'' component. Source on <a href="https://github.com/<%=ghUser %>/<%= elementName %>" target="_blank">Github</a>
     </p>
@@ -118,15 +118,27 @@
 
       <section class="component">
         <label>An example of <%= elementName %>:</label>
-          <<%= elementName %> id="component" output="{{myoutput}}" ></<%= elementName %>>
+          <<%= elementName %> id="component"></<%= elementName %>>
       </section>
 
       <% if(componentType!=='output') {%>
       <section>
-        <label>Result:</label>
-        <pre id="output">{{myoutput | json}}</pre>
+        <label>Output:</label><span class="count"></span>
+        <pre id="output"></pre>
       </section>
       <% } %>
+
+
+      <script>
+        window.onload = function() {
+          var component = document.querySelector('#component');
+          var preOutput = document.getElementById('output');
+
+          component.addEventListener('lens-output-changed', function(val) {
+            preOutput.textContent = JSON.stringify(val.detail, undefined, 2);
+          });
+        }
+      </script>
 
     </template>
   </body>

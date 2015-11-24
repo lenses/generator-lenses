@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html"> 
 <!--
-A Thelma component for input
+A Lenses component for input
 
 ##### Example
 
@@ -13,17 +13,18 @@ A Thelma component for input
 @homepage http://<%= ghUser %>.github.io/<%= elementName %>
 -->
 
-<polymer-element name="<%= elementName %>" attributes="output">
+<dom-module id="<%= elementName %>">
 
   <template>
     <link rel="stylesheet" href="<%= elementName %>.css">
-    <div class="th-container">
+    <div class="lens-container lens-input">
 	    <label class="label">label</label>
-    	<input type="text">		
+    	<input type="text">
     </div>
   </template>
   <script>
-    Polymer('<%= elementName %>', {
+    Polymer({
+      is: '<%= elementName %>',
       /**
        * Output data
        *
@@ -49,9 +50,9 @@ A Thelma component for input
       },
 
       outputChanged: function(){
-        this.fire('lens-output-ready', this);
+        this.fire('lens-output-changed', this);
       }
 
     });
   </script>
-</polymer-element>
+</dom-module>
